@@ -52,7 +52,11 @@ export function PersonModal({ person, onClose, onEdit, onDelete }: Props) {
           <div className="mt-4 rounded-full bg-amber-500/18 px-4 py-2 text-sm font-medium text-amber-700">
             {delayLabel(person.birthdate)} · J-{d}
           </div>
-          {person.note && <p className="mt-4 text-sm text-stone-500">{person.note}</p>}
+          {person.note?.trim() !== "" && person.note && (
+            <p className="mt-4 text-sm text-stone-500">
+              {person.note}
+            </p>
+          )}
         </div>
         <div className="mt-6 flex gap-3">
           <button

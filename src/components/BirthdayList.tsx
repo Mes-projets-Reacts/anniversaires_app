@@ -29,14 +29,14 @@ export function BirthdayList({ birthdays, onOpen, onEdit, onDelete }: Props) {
           <li key={b.id}>
             <div
               onClick={() => onOpen(b)}
-              className="flex cursor-pointer items-center gap-3 rounded-2xl bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+              className="flex cursor-pointer flex-wrap items-center gap-3 rounded-2xl bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
             >
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-red-600/13 text-sm font-semibold text-red-600">
                 {initials(b.name)}
               </div>
-              <div className="flex-1">
-                <p className="font-medium text-stone-800">{b.name}</p>
-                <p className="text-sm text-stone-500">
+              <div className="min-w-0 flex-1">
+                <p className="truncate font-medium text-stone-800">{b.name}</p>
+                <p className="truncate text-sm text-stone-500">
                   {b.birthdate} · {ageOn(b.birthdate)} ans · prochain dans {daysUntil(b.birthdate)} j
                 </p>
               </div>
@@ -52,9 +52,13 @@ export function BirthdayList({ birthdays, onOpen, onEdit, onDelete }: Props) {
                     e.stopPropagation();
                     onEdit(b);
                   }}
-                  className="text-sm text-stone-500 hover:text-amber-500"
+                  aria-label="Modifier"
+                  title="Modifier"
+                  className="rounded-lg p-2 text-stone-500 hover:bg-stone-100 hover:text-amber-500"
                 >
-                  Modifier
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+                  </svg>
                 </button>
                 <button
                   onClick={(e) => {
@@ -62,9 +66,13 @@ export function BirthdayList({ birthdays, onOpen, onEdit, onDelete }: Props) {
                     e.stopPropagation();
                     if (confirm("Supprimer cet anniversaire ?")) onDelete(b.id);
                   }}
-                  className="text-sm text-stone-500 hover:text-red-600"
+                  aria-label="Supprimer"
+                  title="Supprimer"
+                  className="rounded-lg p-2 text-stone-500 hover:bg-stone-100 hover:text-red-600"
                 >
-                  Supprimer
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
+                  </svg>
                 </button>
               </div>
             </div>

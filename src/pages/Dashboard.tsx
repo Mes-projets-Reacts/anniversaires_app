@@ -26,7 +26,7 @@ export default function Dashboard() {
     <div className="space-y-6">
       <div>
         <h1 className="font-[Outfit] text-2xl font-bold text-stone-800">Bonjour 👋</h1>
-        <p className="text-sm text-stone-500">Vos anniversaires à venir</p>
+        <p className="text-sm text-stone-500">Les anniversaires à venir</p>
       </div>
 
       {todayBirthdays.length > 0 && (
