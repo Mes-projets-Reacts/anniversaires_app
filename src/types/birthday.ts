@@ -12,9 +12,14 @@ export type Birthday = BirthdayInput & {
 
 export function isValidBirthdate(value: string): boolean {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
-  const d = new Date(value);
-  if (Number.isNaN(d.getTime())) return false;
-  return d.toISOString().slice(0, 10) === value;
+  const [y, m, d] = value.split("-").map(Number);
+  const date = new Date(y, m - 1, d);
+  if (Number.isNaN(date.getTime())) return false;
+  return (
+    date.getFullYear() === y &&
+    date.getMonth() === m - 1 &&
+    date.getDate() === d
+  );
 }
 
 export function validateBirthdayInput(input: BirthdayInput): void {
