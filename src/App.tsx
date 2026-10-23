@@ -107,7 +107,7 @@ export default function App() {
                 <h2 className="mb-2 font-[Outfit] text-lg font-semibold capitalize text-stone-700">
                   {month}
                 </h2>
-                <BirthdayList birthdays={items} onEdit={handleEdit} onDelete={deleteBirthday} />
+                <BirthdayList birthdays={items} onOpen={() => {}} onEdit={handleEdit} onDelete={deleteBirthday} />
               </section>
             ))}
           </div>

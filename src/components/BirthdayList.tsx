@@ -1,9 +1,9 @@
-import { Link } from "react-router-dom";
 import { ageOn, daysUntil, delayLabel } from "../lib/dates";
 import type { Birthday } from "../types/birthday";
 
 type Props = {
   birthdays: Birthday[];
+  onOpen: (b: Birthday) => void;
   onEdit: (b: Birthday) => void;
   onDelete: (id: string) => void;
 };
@@ -18,7 +18,7 @@ function initials(name: string): string {
     .toUpperCase();
 }
 
-export function BirthdayList({ birthdays, onEdit, onDelete }: Props) {
+export function BirthdayList({ birthdays, onOpen, onEdit, onDelete }: Props) {
   const sorted = [...birthdays].sort((a, b) => daysUntil(a.birthdate) - daysUntil(b.birthdate));
   if (sorted.length === 0) return null;
   return (
@@ -27,9 +27,9 @@ export function BirthdayList({ birthdays, onEdit, onDelete }: Props) {
         const d = daysUntil(b.birthdate);
         return (
           <li key={b.id}>
-            <Link
-              to={`/personne/${b.id}`}
-              className="flex items-center gap-3 rounded-2xl bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+            <div
+              onClick={() => onOpen(b)}
+              className="flex cursor-pointer items-center gap-3 rounded-2xl bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
             >
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-red-600/13 text-sm font-semibold text-red-600">
                 {initials(b.name)}
@@ -67,7 +67,7 @@ export function BirthdayList({ birthdays, onEdit, onDelete }: Props) {
                   Supprimer
                 </button>
               </div>
-            </Link>
+            </div>
           </li>
         );
       })}

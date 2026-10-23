@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useBirthdayContext } from "../context/BirthdayContext";
 import { ageOn, daysUntil, delayLabel } from "../lib/dates";
 
@@ -20,6 +20,14 @@ export default function Personne() {
   const d = daysUntil(b.birthdate);
   return (
     <div className="p-4">
+      <div className="mb-4 flex items-center gap-3">
+        <Link to="/annuaire" className="text-sm text-stone-500 hover:text-red-700">
+          ← Retour à l'annuaire
+        </Link>
+        <Link to="/" className="text-sm text-stone-400 hover:text-stone-700">
+          Accueil
+        </Link>
+      </div>
       <div className="mx-auto max-w-md rounded-3xl bg-white p-8 shadow-lg">
         <div className="flex flex-col items-center text-center">
           <div className="flex h-20 w-20 items-center justify-center rounded-full bg-red-600/13 text-2xl font-bold text-red-600">
