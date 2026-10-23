@@ -37,7 +37,7 @@ export function BirthdayList({ birthdays, onOpen, onEdit, onDelete }: Props) {
               <div className="flex-1">
                 <p className="font-medium text-stone-800">{b.name}</p>
                 <p className="text-sm text-stone-500">
-                  {b.birthdate} · {ageOn(b.birthdate)} ans
+                  {b.birthdate} · {ageOn(b.birthdate)} ans · prochain dans {daysUntil(b.birthdate)} j
                 </p>
               </div>
               {d <= 7 && (
