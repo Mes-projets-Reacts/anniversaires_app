@@ -11,8 +11,8 @@ export default function Annuaire() {
   const { birthdays, deleteBirthday, openEdit } = useBirthdayContext();
   const [selected, setSelected] = useState<Birthday | null>(null);
   const [sort, setSort] = useState<"name" | "date">("date");
-  const [group, setGroup] = useState(false);
   const [query, setQuery] = useState("");
+  const [showEmpty, setShowEmpty] = useState(false);
 
   const filtered = birthdays.filter((b) => b.name.toLowerCase().includes(query.toLowerCase()));
 
@@ -21,12 +21,10 @@ export default function Annuaire() {
     return daysUntil(a.birthdate) - daysUntil(b.birthdate);
   });
 
-  const groups = group
-    ? MONTHS.map((m, i) => ({
-        month: m,
-        items: sorted.filter((b) => new Date(b.birthdate).getMonth() === i),
-      })).filter((g) => g.items.length > 0)
-    : [{ month: "", items: sorted }];
+  const groups = MONTHS.map((m, i) => ({
+    month: m,
+    items: sorted.filter((b) => new Date(b.birthdate).getMonth() === i),
+  })).filter((g) => showEmpty || g.items.length > 0);
 
   return (
     <div className="p-4">
@@ -44,10 +42,10 @@ export default function Annuaire() {
           <option value="name">Nom</option>
         </select>
         <button
-          onClick={() => setGroup((g) => !g)}
+          onClick={() => setShowEmpty((v) => !v)}
           className="rounded-xl border border-stone-300 px-3 py-2 text-sm"
         >
-          {group ? "Sans groupement" : "Par mois"}
+          {showEmpty ? "Masquer les mois vides" : "Afficher les mois vides"}
         </button>
       </div>
       {groups.length === 0 || groups.every((g) => g.items.length === 0) ? (
